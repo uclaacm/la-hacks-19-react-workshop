@@ -1,7 +1,8 @@
 # LA Hacks React Workshop 2019
 
-**Teachers**: Kristie Lim, Connie Chen, Rajeshwari Jadhav
-Code by Galen Wong
+**Teachers**: 
+* Kristie Lim, Connie Chen, Rajeshwari Jadhav
+* Code by Galen Wong
 
 ## Resources
 
@@ -11,8 +12,14 @@ Code by Galen Wong
 
 ## What we'll be learning today
 
-* `Class` in JavaScript
-* React
+* [Motivation of React](#motivation-of-react)
+* [Class in JavaScript](#class-in-javascript)
+    * [Declare a class](#declare-a-class)
+    * [Use a class](#use-a-class)
+* [Set up React](#set-up-react)
+    * [State](#state)
+    * [Accessibility in React](#accessibility-in-react)
+    * [Input and State](#input-and-state)
 
 
 ## Motivation of React
