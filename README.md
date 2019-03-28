@@ -11,8 +11,14 @@ Code by Galen Wong
 
 ## What we'll be learning today
 
-* `Class` in JavaScript
-* React
+* [Motivation of React](#motivation-of-react)
+* [Class in JavaScript](#class-in-javascript)
+    * [Declare a class](#declare-a-class)
+    * [Use a class](#use-a-class)
+* [Set up React](#set-up-react)
+    * [State](#state)
+    * [Accessibility in React](#accessibility-in-react)
+    * [Input and State](#input-and-state)
 
 
 ## Motivation of React
@@ -225,10 +231,11 @@ This syntax is called __JSX__, which is JavaScript-XML.
 XML is kind of similar to HTML but slightly different. See [here](http://courses.cs.vt.edu/~cs1204/XML/htmlVxml.html).
 JSX is made to make writing React easier.
 
-However, __JSX is not JavaScript__. You cannot execute or write JSX in your browser. It is only allowed in React.
+However, __JSX is not JavaScript__. You cannot execute or write JSX in your browser. It is only allowed in React. When we ran the package create-react-app, we automatically set up everything that will convert JSX into the HTML, CSS, and JavaScript that the browser will understand.
 
-`App` is a complex React component containing multiple simple HTML tags.
+`App` is a complex React component containing multiple simple HTML tags. Notice that `App` is a class. Like any other class we've seen, it has some properties and methods. 
 
+One of the main concepts of React is to introduce reuseable components into front-end. There is another way to define a component with some differences from class-components, but we'll just use class-componenets for this workshop. Read more [here](https://medium.com/@Zwenza/functional-vs-class-components-in-react-231e3fbd7108) if interested.
 
 Also, notice the `import` statements. It imported `App.css` and if you check that file, we can see the styling applied to the page.
 
@@ -295,7 +302,7 @@ After you save the file, your browser should refresh automatically.
 <img src="images/modified_react.png" width="500px">
 
 
-Fantasic. Let's go ahead and delete all the stuff in `App` and start our own app.
+Fantastic. Let's go ahead and delete all the stuff in `App` and start our own app.
 
 Let's make a twitter app for yourself. 
 
