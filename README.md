@@ -7,22 +7,26 @@
 ## Resources
 
 * [Slides](https://docs.google.com/presentation/d/10Vpe3_U8vNP-WO1yfnGNFZZLLfP96mwdxbVKmjjLRP0/edit?usp=sharing)
+* [Official React Concepts Guide](https://reactjs.org/docs/hello-world.html)
 * [Official React Tutorial](https://reactjs.org/tutorial/tutorial.html)
 * [Codecademy Tutorial](https://www.codecademy.com/learn/react-101)
 
 ## What we'll be learning today
 
-* [Motivation of React](#motivation-of-react)
+* [Motivation for React](#motivation-for-react)
 * [Class in JavaScript](#class-in-javascript)
     * [Declare a class](#declare-a-class)
     * [Use a class](#use-a-class)
 * [Set up React](#set-up-react)
+* [A Simple Twitter](#a-simple-twitter)
+    * [Creating a Component](#creating-a-component)
+    * [Props](#props)
     * [State](#state)
     * [Accessibility in React](#accessibility-in-react)
     * [Input and State](#input-and-state)
 
 
-## Motivation of React
+## Motivation for React
 HTML elements are the basic building blocks of web pages.
 Even the most complex and large web applications are built on simple tags like `h1`, `img`, `p`, `button` etc.
 
@@ -200,7 +204,7 @@ Let's check out 3 files: __index.html__, __App.js__, __index.js__.
 
 We see the body contains nothing. Then, why is it showing the page with text and images?
 
-Let's check `App.js`.
+Let's check `App.js`. If you're using Sublime, follow this tutorial to get correct syntax highlighting: https://gunnariauvinen.com/getting-es6-syntax-highlighting-in-sublime-text/
 
 ```jsx
 class App extends Component {
@@ -234,7 +238,7 @@ JSX is made to make writing React easier.
 
 However, __JSX is not JavaScript__. You cannot execute or write JSX in your browser. It is only allowed in React. When we ran the package create-react-app, we automatically set up everything that will convert JSX into the HTML, CSS, and JavaScript that the browser will understand.
 
-`App` is a complex React component containing multiple simple HTML tags. Notice that `App` is a class. Like any other class we've seen, it has some properties and methods. 
+`App` is a complex React component containing multiple simple HTML tags. Notice that `App` is a class. It extends `Component` which is defined in React. Like any other class we've seen, `App` has some properties and methods. One method that each React component must have is `render`. `render` returns a single React element. If you want to use multiple lines, you must wrap the element in parentheses.
 
 One of the main concepts of React is to introduce reuseable components into front-end. There is another way to define a component with some differences from class-components, but we'll just use class-componenets for this workshop. Read more [here](https://medium.com/@Zwenza/functional-vs-class-components-in-react-231e3fbd7108) if interested.
 
@@ -305,9 +309,25 @@ After you save the file, your browser should refresh automatically.
 
 Fantastic. Let's go ahead and delete all the stuff in `App` and start our own app.
 
-Let's make a twitter app for yourself. 
+## A Simple Twitter
 
-Let's define a "tweet". 
+Let's make a twitter app for yourself. 
+The only functionality that we care about is being able to add a tweet, display tweets, and like each tweet. This is what the app will look like:
+
+<img src="images/minitwitter.png" width="200px">
+
+Remember that in React we organize our app into components. Each component has certain properties and state. So before we dive into the code, think about the following:
+* What makes sense to turn into a component?
+* What properties does each component have? (Properties being data that doesn't change)
+* What state does each component have? (State being data that does change)
+
+<img src="images/minitwitter_marked.png" width="200px">
+
+Note that we could have made the input bar its own component or the like button its own component, but for simplicity, we're going to make the input bar part of the App component and the like button part of the Tweet component.
+
+### Creating a Component
+
+In a separate file called `Tweet.js`, let's define a Tweet component. Note that we could define this component in the same file as `App.js` but this is bad practice. Especially when you're working on a team, it's nice to have components in separate files so different people can work on different components. 
 
 ```jsx
 class Tweet extends React.Component {
@@ -321,6 +341,13 @@ class Tweet extends React.Component {
     );
   }
 }
+
+export default Tweet;
+```
+
+The last line allows us to use this code in other files. `App.js` will need to import this code so add the following line to the import statements at the top of `App.js`
+```jsx
+import Tweet from './Tweet';
 ```
 
 Let put `Tweet` into `App` so we can see it.
@@ -334,7 +361,9 @@ class App extends Component {
 ```
 
 See that we can use our defined components in `App`.
-We can actually pass in our text for the tweet with something called __props__.
+Right now, we've just hardcoded the text in our tweet. This is not going to work well if we have many different tweets. We can actually pass in our text for the tweet with something called __props__.
+
+### Props
 
 ```jsx
 class Tweet extends React.Component {
@@ -358,7 +387,7 @@ class App extends Component {
 This `tweet` looks like attribute in HTML.
 e.g. `<h1 id="title">`.
 
-Whatever "attributes" are being passed into `Tweet` would be store in an object called `props`. You can access it through `this.props`. 
+Whatever "attributes" are being passed into `Tweet` would be store in an object called `props`. You can access it through `this.props`. `this.props` should never change.
 
 Notice another thing. `this.props.tweet` is a JavaScript syntax in a bunch of HTML codes. 
 We make clear that it is JavaScript by surrounding it with `{ }`.
@@ -482,7 +511,7 @@ This means whenever the button is clicked. It will call a function which calls `
 Save and check your page. Now your like button should work.
 
 
-### Accessibility in React
+#### Accessibility in React
 At this point, you might have noticed that React has been yelling at us all the time for some warning like
 ```
 Line 24:  Emojis should be wrapped in <span>, have role="img", and have an accessible description with aria-label or aria-labelledby

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tweet from './Tweet.js';
+import Tweet from './Tweet';
 
 class App extends Component {
   constructor() {
