@@ -1,7 +1,8 @@
 # LA Hacks React Workshop 2019
 
-**Teachers**: Kristie Lim, Connie Chen, Rajeshwari Jadhav
-Code by Galen Wong
+**Teachers**: 
+* Kristie Lim, Connie Chen, Rajeshwari Jadhav
+* Code by Galen Wong
 
 ## Resources
 
