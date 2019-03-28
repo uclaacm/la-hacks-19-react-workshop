@@ -314,14 +314,14 @@ Fantastic. Let's go ahead and delete all the stuff in `App` and start our own ap
 Let's make a twitter app for yourself. 
 The only functionality that we care about is being able to add a tweet, display tweets, and like each tweet. This is what the app will look like:
 
-<img src="images/minitwitter.png" width="200px">
+<img src="images/minitwitter.png" width="500px">
 
 Remember that in React we organize our app into components. Each component has certain properties and state. So before we dive into the code, think about the following:
 * What makes sense to turn into a component?
 * What properties does each component have? (Properties being data that doesn't change)
 * What state does each component have? (State being data that does change)
 
-<img src="images/minitwitter_marked.png" width="200px">
+<img src="images/minitwitter_marked.png" width="500px">
 
 Note that we could have made the input bar its own component or the like button its own component, but for simplicity, we're going to make the input bar part of the App component and the like button part of the Tweet component.
 
@@ -387,7 +387,7 @@ class App extends Component {
 This `tweet` looks like attribute in HTML.
 e.g. `<h1 id="title">`.
 
-Whatever "attributes" are being passed into `Tweet` would be store in an object called `props`. You can access it through `this.props`. `this.props` should never change.
+Whatever "attributes" are being passed into `Tweet` would be store in an object called `props`. A component should never modify its own props.
 
 Notice another thing. `this.props.tweet` is a JavaScript syntax in a bunch of HTML codes. 
 We make clear that it is JavaScript by surrounding it with `{ }`.
@@ -477,13 +477,12 @@ class Tweet extends React.Component {
     this.state = {
       numLike: 0
     };
-    this.buttonOnClick = () => { this.incrementLike(); };
   }
 
-  incrementLike() {
+  incrementLike = () => {
     const previousLike = this.state.numLike;
     const newState = {
-        numLike: previousLike + 1
+      numLike: previousLike + 1
     };
     this.setState(newState);
   }
@@ -493,20 +492,17 @@ class Tweet extends React.Component {
     return (
       <div>
         <h2>{this.props.tweet}</h2>
-        <button onClick={this.buttonOnClick}>❤️ {numLike} </button>
+        <button onClick={this.incrementLike}>❤️ {numLike} </button>
       </div>
     );
   }
 }
 ```
 There are 3 things that we changed.
-1. We defined the `incrementLike` function. 
+1. We defined the `incrementLike` function. The reason it has to be an arrow function is so it is properly bound to `this` when we pass it into `onClick` later. See [here](https://gist.github.com/fongandrew/f28245920a41788e084d77877e65f22f?fbclid=IwAR3QboXGRdKDwS5dx4HKCFV9oa7Z7TNeHrK3Ac3S5NlaSh9pDbSC_rpSMyA) for more.
 Instead of directly assigning a new object to `this.state`, 
-2. we used a function `this.setState` to help us set state.
-
-3. We set the `onClick` attributes to a function `this.buttonOnclick`.
-The function is being defined in the constructor `() => { this.incrementLike(); }`
-This means whenever the button is clicked. It will call a function which calls `incrementLike`.
+2. we used a function `this.setState` to help us set state. See [here](https://medium.freecodecamp.org/get-pro-with-react-setstate-in-10-minutes-d38251d1c781) for more.
+3. We set the `onClick` attribute to the function `this.incrementLike`.
 
 Save and check your page. Now your like button should work.
 
@@ -532,7 +528,7 @@ render() {
   return (
     <div>
       <h2>{this.props.tweet}</h2>
-      <button onClick={this.buttonOnClick}>
+      <button onClick={this.incrementLike}>
         <span role="img" aria-label="Love">❤️</span> {numLike}
       </button>
     </div>
@@ -562,18 +558,16 @@ class App extends Component {
       currTweet: ''
     };
     this.tweetIndex = 0;
-    this.inputOnChange = (e) => { this.updateCurrTweet(e); };
-    this.buttonOnClick = () => { this.addTweet(); };
   }
 
-  updateCurrTweet(event) {
+  updateCurrTweet = (event) => {
     const newState = {
       currTweet: event.target.value
     };
     this.setState(newState);
   }
 
-  addTweet() {
+  addTweet = () => {
     if (this.state.currTweet === '') {
       alert('Input something first');
       return;
@@ -592,13 +586,14 @@ class App extends Component {
     };
     this.setState(newState);
   }
+
   render() {
     const tweets = this.state.tweets;
     const lists = tweets.map((tweetObj) => <Tweet tweet={tweetObj.content} key={tweetObj.index} />);
     return (
       <div>
-        <input value={this.state.currTweet} onChange={this.inputOnChange}/>
-        <button onClick={this.buttonOnClick}>tweet</button>
+        <input value={this.state.currTweet} onChange={this.updateCurrTweet}/>
+        <button onClick={this.addTweet}>tweet</button>
         {lists}
       </div>
     );
