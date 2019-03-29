@@ -626,8 +626,8 @@ Since `prevTweets` is an array, we expand it inside `[ ]` for JavaScript to know
 Why do we use an object to represent a tweet then? 
 Shouldn't a string itself be enough?
 Why are we keeping an index?
-We see that we pass the index to an attirbute `key` in `Tweet`. 
-This is neccessary so that React can distinguish element from each other. 
+We see that we pass the index to an attribute `key` in `Tweet`. 
+This is neccessary so that React can distinguish the elements from each other. 
 
 
 There you have it. A working twitter.
