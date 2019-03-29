@@ -606,8 +606,8 @@ class App extends Component {
 }
 ```
 
-Let's first look at `updateCurrTweet`. We passed `(e) => this.updateCurrTweet(e)` to `onChange` attribute of `input` tag. 
-Everytime we type in the input box, it calls the function and passes in an "event" object, which holds information about the "change" event.
+Let's first look at `updateCurrTweet`. We passed `(event) => this.updateCurrTweet(event)` to the `onChange` attribute of the `input` tag. 
+Every time we type in the input box, it calls the function and passes in an "event" object, which holds information about the "change" event.
 We can access the value of the event's target, which is the input box. 
 We take that value and put that in the state in `updateCurrTweet`. 
 
