@@ -552,7 +552,9 @@ Make sure you understand it well.
 Before we move on, make sure you understand what `props` and `state` are, and their differences. `props` are variables passed to a component by its parent component. You should never modify `props` within the child component. `state` on the other hand, is a variable initialized and managed by the component itself. You can modify state with the `setState` function.
 
 ### Input and State
-Let's add an input box so you can add new tweet from your app
+Let's add an input box so you can add new tweet from your app instead of hardcoding the tweets.
+
+The idea is that we use the state of the App component to keep track of our tweets that are being inputted by the users, so that we can update the state every time a new tweet is added and make our web app more dynamic. 
 
 ```jsx
 class App extends Component {
