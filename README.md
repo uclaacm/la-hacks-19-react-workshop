@@ -334,8 +334,7 @@ class Tweet extends React.Component {
   render() {
     return (
     <div>
-      <p> I love Rende. </p>
-      <br/>
+      <h2> I love hacking! </h2>
       <button>❤️</button>
     </div>
     );
@@ -366,6 +365,7 @@ Right now, we've just hardcoded the text in our tweet. This is not going to work
 ### Props
 
 ```jsx
+//In Tweet.js
 class Tweet extends React.Component {
   render() {
     return (
@@ -377,9 +377,10 @@ class Tweet extends React.Component {
   }
 }
 
+//In App.js
 class App extends Component {
   render() {
-    return (<Tweet tweet="I love Rende. "/>);
+    return (<Tweet tweet="I love hacking!"/>);
   }
 }
 ```
@@ -399,16 +400,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Tweet tweet="I love Rende. "/>
-        <Tweet tweet="I love Covel. "/>
-        <Tweet tweet="I hate BPlate. "/>
+        <Tweet tweet="I love hacking. "/>
+        <Tweet tweet="I'm hungry. "/>
+        <Tweet tweet="I like donuts. "/>
       </div>
     );
   }
 }
 ```
+Notice that all the tweets are wrapped in a single enclosing tag. We do this because React components are only allowed to return a single element, and we would get a JSX syntax error otherwise. 
 
-We can actually uses an array to help us store these tweets.
+We can actually use an array to help us store these tweets.
 
 ```jsx
 class App extends Component {
@@ -423,15 +425,17 @@ class App extends Component {
   }
 }
 ```
-`map` is a function of array. It iterates through the array `tweets`, 
-and form a new array with each element defined by the function we passed to `map`.
+We put `tweets` and `lists` inside `render()` because they are local variables of that function.
+
+`map` is a function of arrays. It iterates through the array `tweets`, 
+and forms a new array with each element defined by the function we passed to `map`.
 In this case, we passed in `(text) => <Tweet tweet={text} />`. 
-`text` represents each elements. 
-It returns a `Tweet` component with `tweet` set to `text`.
+`text` represents each element. 
+It returns a `Tweet` component with the `tweet` attribute set to `text`.
 
 
 This was the __reuse__ part of React. 
-We reuse the component `Tweet` without worrying the structure inside `Tweet`.
+We reuse the component `Tweet` without worrying about the structure inside `Tweet`.
 
 ### State
 
@@ -458,7 +462,7 @@ class Tweet extends React.Component {
   }
 }
 ```
-In `constructor`, we set a variable `state` to hold an object with a key `numLike`. 
+In `constructor`, we set a variable `state` to hold an object with a key `numLike`. Its value is initialized to 0.
 
 We accessed the state using `this.state` in `render`.
 
@@ -467,7 +471,7 @@ To understand this, you will have to know what __inheritance__ is in
 [Object Oriented Programming](https://searchmicroservices.techtarget.com/definition/object-oriented-programming-OOP).
 It initializes the parent class `React.Component`.
 
-We want to increment the `this.state.numLike` everytime we click the button. Let's define a function to do that.
+We want to increment `this.state.numLike` everytime we click the button. Let's define a function to do that.
 
 
 ```jsx
@@ -545,6 +549,7 @@ And we are using `setState` to update it so that React knows the data on the pag
 **`state` is a super duper important concept in React.** 
 Make sure you understand it well. 
 
+Before we move on, make sure you understand what `props` and `state` are, and their differences. `props` are variables passed to a component by its parent component. You should never modify `props` within the child component. `state` on the other hand, is a variable initialized and managed by the component itself. You can modify state with the `setState` function.
 
 ### Input and State
 Let's add an input box so you can add new tweet from your app
